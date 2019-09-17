@@ -14,7 +14,7 @@ function initSW() {
     }
 
     //register the service worker
-    navigator.serviceWorker.register('sw.js')
+    navigator.serviceWorker.register('sw2.js')
         .then((serviceWorkerRegistration) => {
             console.log('serviceWorker2 installed!');
             initPush(serviceWorkerRegistration);
