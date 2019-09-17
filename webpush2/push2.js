@@ -48,7 +48,7 @@ function subscribeUser(serviceWorkerRegistration) {
     const subscribeOptions = {
         userVisibleOnly: true,
         applicationServerKey: urlBase64ToUint8Array(
-            'BEYdQN2lEM3VA8KGSddZ9fPJAXqrjj1TpCMHr77R9hYFkzPBuxHq6U-a4kQHdZ1cD9WkEZIaK_4oqHv4fL-UUCQ'
+            'BB71JkDmNsYHkKDn5PpbzWnvX10sBlkAyycHQwbIrgjHC8dG9YYWPP_ukOEBefIzCwDaQtGZnE9yvFVPbtUIF7Q'
         )
     };
 
