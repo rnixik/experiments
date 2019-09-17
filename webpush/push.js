@@ -55,7 +55,9 @@ function subscribeUser(serviceWorkerRegistration) {
             const subscription = JSON.stringify(pushSubscription);
             console.log('Received PushSubscription: ', subscription);
             document.getElementById('log').value = subscription;
-            window.top.postMessage({"subscription": subscription}, '*');
+            if (window.opener) {
+                window.opener.postMessage({"subscription": subscription}, '*');
+            }
         });
 }
 
