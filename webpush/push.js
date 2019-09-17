@@ -53,6 +53,7 @@ function subscribeUser(serviceWorkerRegistration) {
     serviceWorkerRegistration.pushManager.subscribe(subscribeOptions)
         .then((pushSubscription) => {
             console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
+            document.getElementById('log').value = JSON.stringify(pushSubscription);
         });
 }
 
