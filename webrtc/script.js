@@ -5,6 +5,7 @@ var chatContainerElement = document.getElementById('chat-container');
 var textToCopyElement = document.getElementById("text-to-copy");
 var signalingContainerElement = document.getElementById('signaling-container');
 var linkContainerElement = document.getElementById('link-container');
+var manualContainerElement = document.getElementById('manual-container');
 
 function uuid () {
     var s4 = function() {
@@ -154,6 +155,7 @@ if (locationHash) {
     var decodedData = decodeURI(locationHash);
     var remoteData = JSON.parse(decodedData);
     remoteOfferReceived(remoteData.id, remoteData.sdp);
+    manualContainerElement.style.display = 'none';
 }
 
 function startSignaling() {
