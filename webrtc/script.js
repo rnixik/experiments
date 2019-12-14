@@ -36,8 +36,13 @@ function initConnection(pc, id, sdpType) {
                 sdp: pc.localDescription
             };
 
-            textToCopyElement.innerText = JSON.stringify(data);
-            linkContainerElement.innerHTML = '<a href="#' + encodeURI(JSON.stringify(data)) + '">Offer link</a>';
+            textToCopyElement.value = JSON.stringify(data);
+            if (isInitiator) {
+                linkContainerElement.innerHTML = '<a href="#' + encodeURI(JSON.stringify(data)) + '">Offer link</a>';
+            }
+
+            textToCopyElement.select();
+            textToCopyElement.setSelectionRange(0, 99999);
         }
     };
 
