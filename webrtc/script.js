@@ -30,19 +30,16 @@ function initConnection(pc, id, sdpType) {
         } else {
             console.log('not candidate');
 
-            // Send ICE candidates?
             var data = {
                 id: id,
-                sdp: pc.localDescription
+                sdp: pc.localDescription,
+                ice: peers[id].candidateCache
             };
 
             textToCopyElement.value = JSON.stringify(data);
             if (isInitiator) {
                 linkContainerElement.innerHTML = '<a href="#' + encodeURI(JSON.stringify(data)) + '">Offer link</a>';
             }
-
-            textToCopyElement.select();
-            textToCopyElement.setSelectionRange(0, 99999);
         }
     };
 
@@ -146,6 +143,10 @@ function applyRemote() {
     } else {
         remoteOfferReceived(data.id, data.sdp);
     }
+
+    for (var i = 0; i < data.ice.length; i++) {
+        remoteCandidateReceived(data.id, data.ice[i]);
+    }
 }
 
 var locationHash = location.hash.substr(1);
@@ -178,6 +179,12 @@ function startSignaling() {
             console.error(err);
         }
     };
+}
+
+function copy() {
+    textToCopyElement.select();
+    textToCopyElement.setSelectionRange(0, 99999);
+    document.execCommand("copy");
 }
 
 window.addEventListener("beforeunload", onBeforeUnload);
