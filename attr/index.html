@@ -44,34 +44,30 @@
             <td id="ipv6"></td>
         </tr>
     </table>
-    <script
-            src="https://code.jquery.com/jquery-2.2.4.min.js"
-            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-            crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
     <script>
         function ipv4Ready(data) {
-            $('#ipv4').html(data.ip);
+            document.querySelector('#ipv4').innerHTML = data.ip;
             console.log('ipv4', data);
         }
 
         function ipv6Ready(data) {
-            if (data.ip.length > 15) {
-                $('#ipv6').html(data.ip);
+            if (data.ip.indexOf(':') > -1) {
+                document.querySelector('#ipv6').innerHTML = data.ip;
             }
             console.log('ipv6', data);
         }
 
         var parser = new UAParser();
         var result = parser.getResult();
-        $('#device').html(result.device.model);
-        $('#os').html(result.os.name + ' ' + result.os.version);
+        document.querySelector('#device').innerHTML = result.device.model ? result.device.model : '';
+        document.querySelector('#os').innerHTML = result.os.name + ' ' + (result.os.version ? result.os.version : '');
 
-        $('#width').html(window.screen.width);
-        $('#height').html(window.screen.height);
+        document.querySelector('#width').innerHTML = window.screen.width;
+        document.querySelector('#height').innerHTML = window.screen.height;
 
-        $('#awidth').html(window.screen.availWidth);
-        $('#aheight').html(window.screen.availHeight);
+        document.querySelector('#awidth').innerHTML = window.screen.availWidth;
+        document.querySelector('#aheight').innerHTML = window.screen.availHeight;
     </script>
     <script src="https://api.ipify.org?format=jsonp&callback=ipv4Ready"></script>
     <script src="https://api6.ipify.org?format=jsonp&callback=ipv6Ready"></script>
