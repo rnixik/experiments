@@ -50,16 +50,17 @@
             crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
     <script>
-
-        $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
+        function ipv4Ready(data) {
             $('#ipv4').html(data.ip);
-        });
+            console.log('ipv4', data);
+        }
 
-        var domain = location.host;
-        $.getJSON('https://ds.v6ns.vm1.test-ipv6.com/ip/?&testdomain=' + domain + '&testname=test_v6ns&callback=', function(data) {
-            console.log(data);
-            $('#ipv6').html(JSON.stringify(data));
-        });
+        function ipv6Ready(data) {
+            if (data.ip.length > 15) {
+                $('#ipv6').html(data.ip);
+            }
+            console.log('ipv6', data);
+        }
 
         var parser = new UAParser();
         var result = parser.getResult();
@@ -72,5 +73,7 @@
         $('#awidth').html(window.screen.availWidth);
         $('#aheight').html(window.screen.availHeight);
     </script>
+    <script src="https://api.ipify.org?format=jsonp&callback=ipv4Ready"></script>
+    <script src="https://api6.ipify.org?format=jsonp&callback=ipv6Ready"></script>
 </body>
 </html>
