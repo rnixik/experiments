@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+<head>
+    <title>Mobile Attribution test</title>
+    <meta charset="utf-8">
+</head>
+<body>
+    <h1>Mobile Attribution test</h1>
+    <table border="1">
+        <tr>
+            <th>Property</th>
+            <th>Value</th>
+        </tr>
+        <tr>
+            <td>IPv4</td>
+            <td id="ipv4"></td>
+        </tr>
+        <tr>
+            <td>Device name</td>
+            <td id="device"></td>
+        </tr>
+        <tr>
+            <td>OS Version</td>
+            <td id="os"></td>
+        </tr>
+        <tr>
+            <td>Screen width</td>
+            <td id="width"></td>
+        </tr>
+        <tr>
+            <td>Screen height</td>
+            <td id="height"></td>
+        </tr>
+        <tr>
+            <td>Available screen width</td>
+            <td id="awidth"></td>
+        </tr>
+        <tr>
+            <td>Available screen height</td>
+            <td id="aheight"></td>
+        </tr>
+        <tr>
+            <td>IPv6</td>
+            <td id="ipv6"></td>
+        </tr>
+    </table>
+    <script
+            src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ua-parser-js@0/dist/ua-parser.min.js"></script>
+    <script>
+
+        $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
+            $('#ipv4').html(data.ip);
+        });
+
+        var domain = location.host;
+        $.getJSON('https://ds.v6ns.vm1.test-ipv6.com/ip/?&testdomain=' + domain + '&testname=test_v6ns&callback=', function(data) {
+            console.log(data);
+            $('#ipv6').html(JSON.stringify(data));
+        });
+
+        var parser = new UAParser();
+        var result = parser.getResult();
+        $('#device').html(result.device.model);
+        $('#os').html(result.os.name + ' ' + result.os.version);
+
+        $('#width').html(window.screen.width);
+        $('#height').html(window.screen.height);
+
+        $('#awidth').html(window.screen.availWidth);
+        $('#aheight').html(window.screen.availHeight);
+    </script>
+</body>
+</html>
